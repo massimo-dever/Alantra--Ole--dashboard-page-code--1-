@@ -1,0 +1,46 @@
+export function getBudgetManagementData() {
+  return {
+    kpis: {
+      totalBudget: 2600000,
+      totalActual: 2583000,
+      totalVariance: -17000,
+      variancePercent: -0.7,
+      utilizationRate: 99.3,
+      categoriesOverBudget: 2,
+      categoriesUnderBudget: 5,
+    },
+    budgetByCategory: [
+      { category: "Payroll", budget: 1200000, actual: 1180000, variance: -20000 },
+      { category: "Marketing", budget: 500000, actual: 520000, variance: 20000 },
+      { category: "R&D", budget: 400000, actual: 380000, variance: -20000 },
+      { category: "Office", budget: 200000, actual: 195000, variance: -5000 },
+      { category: "Software", budget: 150000, actual: 165000, variance: 15000 },
+      { category: "Travel", budget: 100000, actual: 95000, variance: -5000 },
+      { category: "Other", budget: 50000, actual: 48000, variance: -2000 },
+    ],
+    monthlyBudgetTrend: [
+      { month: "Jan", budget: 217000, actual: 210000 },
+      { month: "Feb", budget: 217000, actual: 215000 },
+      { month: "Mar", budget: 217000, actual: 225000 },
+      { month: "Apr", budget: 217000, actual: 212000 },
+      { month: "May", budget: 217000, actual: 220000 },
+      { month: "Jun", budget: 217000, actual: 218000 },
+      { month: "Jul", budget: 217000, actual: 208000 },
+      { month: "Aug", budget: 217000, actual: 230000 },
+      { month: "Sep", budget: 217000, actual: 215000 },
+      { month: "Oct", budget: 217000, actual: 210000 },
+      { month: "Nov", budget: 217000, actual: 205000 },
+      { month: "Dec", budget: 217000, actual: 215000 },
+    ],
+    departmentAllocation: [
+      { name: "Payroll", value: 1200000, color: "#3b82f6" },
+      { name: "Marketing", value: 500000, color: "#10b981" },
+      { name: "R&D", value: 400000, color: "#f59e0b" },
+      { name: "Office", value: 200000, color: "#8b5cf6" },
+      { name: "Software", value: 150000, color: "#ef4444" },
+      { name: "Travel", value: 100000, color: "#06b6d4" },
+      { name: "Other", value: 50000, color: "#64748b" },
+    ],
+    isMockData: true,
+  }
+}
