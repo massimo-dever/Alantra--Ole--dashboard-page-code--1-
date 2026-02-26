@@ -24,11 +24,13 @@ import {
   Calendar,
   BarChart3,
   FileText,
+  Home,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useToast } from "@/hooks/use-toast"
 
 export type DashboardView =
+  | "home"
   | "budget-summary"
   | "overview"
   | "cash-flow"
@@ -91,6 +93,7 @@ export function Sidebar({ currentView, onViewChange }: SidebarProps) {
       <div className="flex-1 overflow-y-auto py-3 px-2 space-y-5">
         {/* Quick actions */}
         <div className="space-y-0.5">
+          <NavItem icon={Home} label="Home" active={currentView === "home"} onClick={() => onViewChange("home")} collapsed={collapsed} />
           <NavItem icon={Settings} label="Settings" active={currentView === "settings"} onClick={() => onViewChange("settings")} collapsed={collapsed} />
         </div>
 

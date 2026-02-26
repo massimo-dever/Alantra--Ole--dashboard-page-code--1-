@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import { Sidebar, type DashboardView } from "@/components/sidebar"
 import { Header } from "@/components/header"
 import { BudgetSummaryView } from "@/components/views/budget-summary-view"
@@ -17,8 +17,10 @@ import { TransactionsView } from "@/components/views/transactions-view"
 import { SettingsView } from "@/components/views/settings-view"
 import { ReportsDashboard } from "@/components/views/reports-dashboard"
 import { ReportBuilder } from "@/components/reports/report-builder"
+import { HomeDashboard } from "@/components/views/home-dashboard"
 
 const viewTitles: Record<DashboardView, string> = {
+  home: "Home",
   "budget-summary": "Budget Summary",
   overview: "Overview",
   "cash-flow": "Cash Flow",
@@ -35,6 +37,7 @@ const viewTitles: Record<DashboardView, string> = {
 }
 
 const viewSections: Record<DashboardView, string> = {
+  home: "Home",
   "budget-summary": "Dashboards",
   overview: "Dashboards",
   "cash-flow": "Dashboards",
@@ -51,11 +54,13 @@ const viewSections: Record<DashboardView, string> = {
 }
 
 export default function Home() {
-  const [currentView, setCurrentView] = useState<DashboardView>("budget-summary")
+  const [currentView, setCurrentView] = useState<DashboardView>("home")
   const [showReportBuilder, setShowReportBuilder] = useState(false)
 
   const renderView = () => {
     switch (currentView) {
+      case "home":
+        return <HomeDashboard />
       case "budget-summary":
         return <BudgetSummaryView />
       case "overview":
@@ -83,7 +88,7 @@ export default function Home() {
       case "settings":
         return <SettingsView />
       default:
-        return <BudgetSummaryView />
+        return <HomeDashboard />
     }
   }
 
