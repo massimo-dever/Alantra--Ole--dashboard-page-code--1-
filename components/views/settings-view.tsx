@@ -12,6 +12,55 @@ import { useToast } from "@/hooks/use-toast"
 import { SyncStatusIndicator } from "@/components/integrations/sync-status-indicator"
 import { SyncHistory } from "@/components/integrations/sync-history"
 import { ImportDialog } from "@/components/spreadsheet/import-dialog"
+import { usePlaidLink } from "react-plaid-link"
+import { useEffect } from "react"
+
+function PlaidConnectButton({ userId, onSuccess }: { userId: string, onSuccess: () => void }) {
+  const [linkToken, setLinkToken] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    fetch("/api/plaid/create-link-token", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId }),
+    })
+      .then((res) => res.json())
+      .then((data) => setLinkToken(data.link_token))
+  }, [userId])
+
+  const { open, ready } = usePlaidLink({
+    token: linkToken ?? "",
+    onSuccess: async (publicToken) => {
+      setLoading(true)
+      await fetch("/api/plaid/exchange-token", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ publicToken, userId }),
+      })
+      await fetch("/api/plaid/sync", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId }),
+      })
+      setLoading(false)
+      onSuccess() // ✅ Notify parent on success
+    },
+  })
+
+  return (
+    <Button
+      variant="outline"
+      size="sm"
+      className="text-xs bg-transparent"
+      onClick={() => open()}
+      disabled={!ready || loading}
+    >
+      {loading ? "Connecting..." : "Connect"}
+    </Button>
+  )
+}
+
 
 export function SettingsView() {
   const [tab, setTab] = useState("profile")
@@ -157,10 +206,31 @@ function OrgSettings() {
 }
 
 function IntegrationsSettings() {
+  const TEST_USER_ID = "22527dda-eb18-48a2-8c3f-b7268a55caec"
+  const [plaidConnected, setPlaidConnected] = useState(false)
+
   const connectors = [
-    { id: "plaid", name: "Plaid", type: "Banking", status: "not_connected", description: "Connect bank accounts for automatic transaction sync" },
-    { id: "stripe", name: "Stripe", type: "Payments", status: "not_connected", description: "Sync revenue and payment data from Stripe" },
-    { id: "csv", name: "CSV Upload", type: "Manual", status: "available", description: "Import transactions from CSV files" },
+    {
+      id: "plaid",
+      name: "Plaid",
+      type: "Banking",
+      status: plaidConnected ? "connected" : "not_connected",
+      description: "Connect bank accounts for automatic transaction sync",
+    },
+    {
+      id: "stripe",
+      name: "Stripe",
+      type: "Payments",
+      status: "not_connected",
+      description: "Sync revenue and payment data from Stripe",
+    },
+    {
+      id: "csv",
+      name: "CSV Upload",
+      type: "Manual",
+      status: "available",
+      description: "Import transactions from CSV files",
+    },
   ]
 
   return (
@@ -168,35 +238,62 @@ function IntegrationsSettings() {
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-sm font-semibold text-foreground">Data Sources</h3>
-          <p className="text-xs text-muted-foreground mt-0.5">Connect your financial accounts and data sources</p>
+          <p className="text-xs text-muted-foreground mt-0.5">
+            Connect your financial accounts and data sources
+          </p>
         </div>
         <ImportDialog />
       </div>
+
       <div className="space-y-3">
-        {connectors.map(conn => (
+        {connectors.map((conn) => (
           <Card key={conn.id} className="shadow-sm border-border">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="size-10 rounded-lg bg-muted flex items-center justify-center">
-                    <span className="text-xs font-bold text-muted-foreground">{conn.name[0]}</span>
+                    <span className="text-xs font-bold text-muted-foreground">
+                      {conn.name[0]}
+                    </span>
                   </div>
                   <div>
                     <p className="text-sm font-medium text-foreground">{conn.name}</p>
                     <p className="text-xs text-muted-foreground">{conn.description}</p>
                   </div>
                 </div>
+
                 <div className="flex items-center gap-2">
-                  <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
-                    conn.status === "connected" ? "bg-green-100 text-green-700" :
-                    conn.status === "available" ? "bg-blue-100 text-blue-700" :
-                    "bg-muted text-muted-foreground"
-                  }`}>
-                    {conn.status === "connected" ? "Connected" : conn.status === "available" ? "Available" : "Not Connected"}
+                  <span
+                    className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
+                      conn.status === "connected"
+                        ? "bg-blue-100 text-blue-700"
+                        : conn.status === "available"
+                        ? "bg-blue-100 text-blue-700"
+                        : "bg-muted text-muted-foreground"
+                    }`}
+                  >
+                    {conn.status === "connected"
+                      ? "Connected"
+                      : conn.status === "available"
+                      ? "Available"
+                      : "Not Connected"}
                   </span>
-                  <Button variant="outline" size="sm" className="text-xs bg-transparent" disabled={conn.id !== "csv"}>
-                    {conn.status === "connected" ? "Manage" : "Connect"}
-                  </Button>
+
+                  {conn.id === "plaid" ? (
+                    <PlaidConnectButton
+                      userId={TEST_USER_ID}
+                      onSuccess={() => setPlaidConnected(true)}
+                    />
+                  ) : (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="text-xs bg-transparent"
+                      disabled={conn.id !== "csv"}
+                    >
+                      {conn.status === "connected" ? "Manage" : "Connect"}
+                    </Button>
+                  )}
                 </div>
               </div>
             </CardContent>
@@ -206,6 +303,7 @@ function IntegrationsSettings() {
     </div>
   )
 }
+
 
 function SyncSettings() {
   return (

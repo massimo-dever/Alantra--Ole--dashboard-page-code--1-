@@ -1,10 +1,10 @@
 "use client"
 
-import { useState } from "react"
-import { useDashboardData } from "@/hooks/use-dashboard-data"
+import { useState, useMemo } from "react"
+import { transformPlaidData } from "@/lib/plaidTransformer"
+import { calculateFinancialGoalsData } from "@/lib/dashboardCalculations2"
 import { MetricCard } from "@/components/charts/metric-card"
-import { DashboardLoading } from "@/components/dashboard-loading"
-import { MockDataBanner } from "@/components/mock-data-banner"
+import plaidData from "@/data/plaid_api_response.json"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
@@ -31,22 +31,23 @@ interface FinancialGoalsData {
     totalCurrentValue: number
   }
   goals: GoalItem[]
-  isMockData?: boolean
 }
 
 export function FinancialGoalsDashboard() {
-  const { data, isLoading, isMockData } = useDashboardData<FinancialGoalsData>("financial-goals")
   const [selectedGoalId, setSelectedGoalId] = useState<number>(1)
 
-  if (isLoading || !data) return <DashboardLoading />
+  const data = useMemo(() => {
+    const { transactions } = transformPlaidData(plaidData)
+    return calculateFinancialGoalsData(transactions)
+  }, [])
+
+  if (!data) return null
 
   const { kpis, goals } = data
   const selectedGoal = goals.find((g) => g.id === selectedGoalId) || goals[0]
 
   return (
     <div className="flex-1 overflow-auto p-6">
-      <MockDataBanner visible={isMockData} />
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-6 mt-4">
         <MetricCard title="Total Goals" value={String(kpis.totalGoals)} change="" trend="up" />
         <MetricCard title="On Track" value={String(kpis.onTrack)} change="" trend="up" />

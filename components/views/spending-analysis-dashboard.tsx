@@ -1,9 +1,10 @@
 "use client"
 
-import { useDashboardData } from "@/hooks/use-dashboard-data"
+import { useMemo } from "react"
+import { transformPlaidData } from "@/lib/plaidTransformer"
+import { calculateSpendingAnalysisData } from "@/lib/dashboardCalculations"
 import { MetricCard } from "@/components/charts/metric-card"
-import { DashboardLoading } from "@/components/dashboard-loading"
-import { MockDataBanner } from "@/components/mock-data-banner"
+import plaidData from "@/data/plaid_api_response.json"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts"
@@ -13,20 +14,20 @@ interface SpendingData {
   monthlySpending: { month: string; amount: number }[]
   topMerchants: { merchant: string; category: string; amount: number; budget: number; variance: string }[]
   kpis: { totalSpend: number; change: number; avgDailySpend: number }
-  isMockData?: boolean
 }
 
 export function SpendingAnalysisDashboard() {
-  const { data, isLoading, isMockData } = useDashboardData<SpendingData>("spending-analysis")
+  const data = useMemo(() => {
+    const { transactions, vendors } = transformPlaidData(plaidData)
+    return calculateSpendingAnalysisData(transactions, vendors)
+  }, [])
 
-  if (isLoading || !data) return <DashboardLoading />
+  if (!data) return null
 
   const { spendingByCategory, monthlySpending, topMerchants, kpis } = data
 
   return (
     <div className="flex-1 overflow-auto p-6">
-      <MockDataBanner visible={isMockData} />
-
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 mt-4">
         <MetricCard title="Total Spend" value={`$${(kpis.totalSpend / 1000).toFixed(0)}K`} change={`+${kpis.change.toFixed(1)}`} trend="up" />
         <MetricCard title="Change vs Previous Period" value={`+${kpis.change.toFixed(1)}%`} change="" trend="up" />

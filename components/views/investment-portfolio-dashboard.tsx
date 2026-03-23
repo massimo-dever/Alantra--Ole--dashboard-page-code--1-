@@ -1,9 +1,10 @@
 "use client"
 
-import { useDashboardData } from "@/hooks/use-dashboard-data"
+import { useMemo } from "react"
+import { transformPlaidData } from "@/lib/plaidTransformer"
+import { calculateInvestmentPortfolioData } from "@/lib/dashboardCalculations2"
 import { MetricCard } from "@/components/charts/metric-card"
-import { DashboardLoading } from "@/components/dashboard-loading"
-import { MockDataBanner } from "@/components/mock-data-banner"
+import plaidData from "@/data/plaid_api_response.json"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
@@ -24,20 +25,20 @@ interface InvestmentData {
   assetAllocation: { name: string; value: number; color: string }[]
   portfolioHistory: { date: string; value: number }[]
   holdings: { ticker: string; name: string; quantity: number; costBasis: number; currentPrice: number; pnl: number; dayChange: number }[]
-  isMockData?: boolean
 }
 
 export function InvestmentPortfolioDashboard() {
-  const { data, isLoading, isMockData } = useDashboardData<InvestmentData>("investment-portfolio")
+  const data = useMemo(() => {
+    const { accounts } = transformPlaidData(plaidData)
+    return calculateInvestmentPortfolioData(accounts)
+  }, [])
 
-  if (isLoading || !data) return <DashboardLoading />
+  if (!data) return null
 
   const { kpis, assetAllocation, portfolioHistory, holdings } = data
 
   return (
     <div className="flex-1 overflow-auto p-6">
-      <MockDataBanner visible={isMockData} />
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-6 mt-4">
         <MetricCard
           title="Total Portfolio Value"

@@ -1,9 +1,10 @@
 "use client"
 
-import { useDashboardData } from "@/hooks/use-dashboard-data"
+import { useMemo } from "react"
+import { transformPlaidData } from "@/lib/plaidTransformer"
+import { calculateBudgetManagementData } from "@/lib/dashboardCalculations2"
 import { MetricCard } from "@/components/charts/metric-card"
-import { DashboardLoading } from "@/components/dashboard-loading"
-import { MockDataBanner } from "@/components/mock-data-banner"
+import plaidData from "@/data/plaid_api_response.json"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -25,13 +26,15 @@ interface BudgetManagementData {
   budgetByCategory: { category: string; budget: number; actual: number; variance: number }[]
   monthlyBudgetTrend: { month: string; budget: number; actual: number }[]
   departmentAllocation: { name: string; value: number; color: string }[]
-  isMockData?: boolean
 }
 
 export function BudgetManagementDashboard() {
-  const { data, isLoading, isMockData } = useDashboardData<BudgetManagementData>("budget-management")
+  const data = useMemo(() => {
+    const { transactions, vendors } = transformPlaidData(plaidData)
+    return calculateBudgetManagementData(transactions, vendors)
+  }, [])
 
-  if (isLoading || !data) return <DashboardLoading />
+  if (!data) return null
 
   const { kpis, budgetByCategory, monthlyBudgetTrend, departmentAllocation } = data
 
@@ -60,8 +63,6 @@ export function BudgetManagementDashboard() {
 
   return (
     <div className="flex-1 overflow-auto p-6">
-      <MockDataBanner visible={isMockData} />
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 mt-4">
         <MetricCard
           title="Total Budget"
