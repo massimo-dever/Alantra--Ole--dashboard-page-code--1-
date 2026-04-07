@@ -1,11 +1,12 @@
 "use client"
 
-import { useDashboardData } from "@/hooks/use-dashboard-data"
+import { useMemo } from "react"
+import { transformPlaidData } from "@/lib/plaidTransformer"
+import { calculateOverviewData } from "@/lib/dashboardCalculations"
 import { MetricCard } from "@/components/charts/metric-card"
-import { DashboardLoading } from "@/components/dashboard-loading"
-import { MockDataBanner } from "@/components/mock-data-banner"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart } from "recharts"
+import plaidData from "@/data/plaid_api_response.json"
 
 interface OverviewData {
   monthlyData: { month: string; revenue: number; expenses: number; netIncome: number }[]
@@ -20,20 +21,20 @@ interface OverviewData {
     monthlyGrowth: number
     lastRefresh: string
   }
-  isMockData?: boolean
 }
 
 export function OverviewDashboard() {
-  const { data, isLoading, isMockData } = useDashboardData<OverviewData>("overview")
+  const data = useMemo(() => {
+    const { transactions, accounts, customers, vendors } = transformPlaidData(plaidData)
+    return calculateOverviewData(transactions, accounts, customers, vendors)
+  }, [])
 
-  if (isLoading || !data) return <DashboardLoading />
+  if (!data) return null
 
   const { monthlyData, kpis } = data
 
   return (
     <div className="flex-1 overflow-auto p-6">
-      <MockDataBanner visible={isMockData} />
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-6 mt-4">
         <MetricCard
           title="Total Revenue (L12M)"

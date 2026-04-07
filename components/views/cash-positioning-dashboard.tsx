@@ -1,8 +1,9 @@
 "use client"
 
-import { useDashboardData } from "@/hooks/use-dashboard-data"
-import { DashboardLoading } from "@/components/dashboard-loading"
-import { MockDataBanner } from "@/components/mock-data-banner"
+import { useMemo } from "react"
+import { transformPlaidData } from "@/lib/plaidTransformer"
+import { calculateCashPositioningForDashboard } from "@/lib/dashboardCalculations2"
+import plaidData from "@/data/plaid_api_response.json"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import {
@@ -14,20 +15,20 @@ interface CashPositioningData {
   cashBalanceData: { date: string; balance: number }[]
   entityBreakdown: { name: string; value: number; color: string }[]
   accountsData: { name: string; entity: string; type: string; currency: string; amount: number; lastUpdated: string }[]
-  isMockData?: boolean
 }
 
 export function CashPositioningDashboard() {
-  const { data, isLoading, isMockData } = useDashboardData<CashPositioningData>("cash-positioning")
+  const data = useMemo(() => {
+    const { transactions, accounts } = transformPlaidData(plaidData)
+    return calculateCashPositioningForDashboard(transactions, accounts)
+  }, [])
 
-  if (isLoading || !data) return <DashboardLoading />
+  if (!data) return null
 
   const { cashBalanceData, entityBreakdown, accountsData } = data
 
   return (
     <div className="flex-1 overflow-auto p-6">
-      <MockDataBanner visible={isMockData} />
-
       <div className="grid grid-cols-12 gap-6 mb-6 mt-4">
         <div className="col-span-12 lg:col-span-8">
           <Card className="shadow-sm border-border">

@@ -1,0 +1,320 @@
+{
+  "exportedAt": "2026-03-06T17:38:24.188Z",
+  "userId": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+  "accounts": [
+    {
+      "id": "W6Jw3Nx6oxTkZ33Mj6bXSjXLB8LRJGi6LG569",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "name": "Plaid Checking",
+      "type": "depository",
+      "subtype": "checking",
+      "balance": 110,
+      "currency": "USD",
+      "created_at": "2026-03-06T17:38:22.887401+00:00"
+    },
+    {
+      "id": "A715JNP7lPtKx88PoAmlIPgJ8DJMxWc9Gvk9w",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "name": "Plaid Saving",
+      "type": "depository",
+      "subtype": "savings",
+      "balance": 210,
+      "currency": "USD",
+      "created_at": "2026-03-06T17:38:22.887401+00:00"
+    },
+    {
+      "id": "GLwbJZMLGMhKnjjWDM8dI6Xl84l9nAc6E4L6v",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "name": "Plaid CD",
+      "type": "depository",
+      "subtype": "cd",
+      "balance": 1000,
+      "currency": "USD",
+      "created_at": "2026-03-06T17:38:22.887401+00:00"
+    },
+    {
+      "id": "nL4mvErLXrhGLVVJn8QvSv9AG1AVz6cAxBXA4",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "name": "Plaid Credit Card",
+      "type": "credit",
+      "subtype": "credit card",
+      "balance": 410,
+      "currency": "USD",
+      "created_at": "2026-03-06T17:38:22.887401+00:00"
+    },
+    {
+      "id": "bdpeZEMdaMUGd668wQrVS6WBxRBEm5cmDwJmJ",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "name": "Plaid Money Market",
+      "type": "depository",
+      "subtype": "money market",
+      "balance": 43200,
+      "currency": "USD",
+      "created_at": "2026-03-06T17:38:22.887401+00:00"
+    },
+    {
+      "id": "m1JWvyK1eKIE133jP64vHR876L7pwocgq5lgK",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "name": "Plaid IRA",
+      "type": "investment",
+      "subtype": "ira",
+      "balance": 320.76,
+      "currency": "USD",
+      "created_at": "2026-03-06T17:38:22.887401+00:00"
+    },
+    {
+      "id": "ymd9wq7ma7i9bMMrlBDwTaoRPMRNB7H4NQZ4k",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "name": "Plaid 401k",
+      "type": "investment",
+      "subtype": "401k",
+      "balance": 23631.9805,
+      "currency": "USD",
+      "created_at": "2026-03-06T17:38:22.887401+00:00"
+    },
+    {
+      "id": "93kWJrz3vzcNxppZdAGPtzqDAZDJBni4Pm34l",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "name": "Plaid Student Loan",
+      "type": "loan",
+      "subtype": "student",
+      "balance": 65262,
+      "currency": "USD",
+      "created_at": "2026-03-06T17:38:22.887401+00:00"
+    },
+    {
+      "id": "vGBbvXNGrNtEGZZ3LKrvH5dXboXRy7Iq5DPqW",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "name": "Plaid Mortgage",
+      "type": "loan",
+      "subtype": "mortgage",
+      "balance": 56302.06,
+      "currency": "USD",
+      "created_at": "2026-03-06T17:38:22.887401+00:00"
+    },
+    {
+      "id": "RmBJq3KmeKiQnEEZgdeoTZbz5wz98RCadQLaa",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "name": "Plaid HSA",
+      "type": "depository",
+      "subtype": "hsa",
+      "balance": 6009,
+      "currency": "USD",
+      "created_at": "2026-03-06T17:38:22.887401+00:00"
+    },
+    {
+      "id": "6rXJplqrwqSBMvv1NARaCqkxbyxVogC8wRq81",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "name": "Plaid Cash Management",
+      "type": "depository",
+      "subtype": "cash management",
+      "balance": 12060,
+      "currency": "USD",
+      "created_at": "2026-03-06T17:38:22.887401+00:00"
+    },
+    {
+      "id": "XXopxPdXNdHbaqq3y7PGH3L46q4DVZtbBRrbP",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "name": "Plaid Business Credit Card",
+      "type": "credit",
+      "subtype": "credit card",
+      "balance": 5020,
+      "currency": "USD",
+      "created_at": "2026-03-06T17:38:22.887401+00:00"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "axkJQpZxEZUKxjjD9doVIwvVwpWwagFZW9rLA",
+      "account_id": "nL4mvErLXrhGLVVJn8QvSv9AG1AVz6cAxBXA4",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "amount": 500,
+      "date": "2026-02-28",
+      "name": "United Airlines",
+      "category": null,
+      "merchant_name": "United Airlines",
+      "pending": false,
+      "created_at": "2026-03-06T17:38:23.890135+00:00"
+    },
+    {
+      "id": "lM7g6EkMXktGMNNroDR8SKBXKP1KJ7upXvl8r",
+      "account_id": "W6Jw3Nx6oxTkZ33Mj6bXSjXLB8LRJGi6LG569",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "amount": 6.33,
+      "date": "2026-02-26",
+      "name": "Uber 072515 SF**POOL**",
+      "category": null,
+      "merchant_name": "Uber",
+      "pending": false,
+      "created_at": "2026-03-06T17:38:23.890135+00:00"
+    },
+    {
+      "id": "4q6w1LRq3Rh51qqAwo7XSL8qLAzLyofJ1xB7G",
+      "account_id": "nL4mvErLXrhGLVVJn8QvSv9AG1AVz6cAxBXA4",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "amount": 500,
+      "date": "2026-02-23",
+      "name": "Tectra Inc",
+      "category": null,
+      "merchant_name": "Tectra Inc",
+      "pending": false,
+      "created_at": "2026-03-06T17:38:23.890135+00:00"
+    },
+    {
+      "id": "jQp3vEWQeWT9QJJoK7NvTRzeR7WR81u6X3DLP",
+      "account_id": "nL4mvErLXrhGLVVJn8QvSv9AG1AVz6cAxBXA4",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "amount": 2078.5,
+      "date": "2026-02-22",
+      "name": "AUTOMATIC PAYMENT - THANK",
+      "category": null,
+      "merchant_name": "AUTOMATIC PAYMENT - THANK",
+      "pending": false,
+      "created_at": "2026-03-06T17:38:23.890135+00:00"
+    },
+    {
+      "id": "PnrRJzlnylSb688Qq3XyHQWaQ8PQrMfoM4gWz",
+      "account_id": "nL4mvErLXrhGLVVJn8QvSv9AG1AVz6cAxBXA4",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "amount": 500,
+      "date": "2026-02-22",
+      "name": "KFC",
+      "category": null,
+      "merchant_name": "KFC",
+      "pending": false,
+      "created_at": "2026-03-06T17:38:23.890135+00:00"
+    },
+    {
+      "id": "NkqVJKEkeEfw9mmRAzVbhRLaRv4RgWuyD19me",
+      "account_id": "nL4mvErLXrhGLVVJn8QvSv9AG1AVz6cAxBXA4",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "amount": 500,
+      "date": "2026-02-22",
+      "name": "Madison Bicycle Shop",
+      "category": null,
+      "merchant_name": "Madison Bicycle Shop",
+      "pending": false,
+      "created_at": "2026-03-06T17:38:23.890135+00:00"
+    },
+    {
+      "id": "3lPVM1RlWRTN5WWbv1n3tNo7NqENyRuZ1az3N",
+      "account_id": "A715JNP7lPtKx88PoAmlIPgJ8DJMxWc9Gvk9w",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "amount": 25,
+      "date": "2026-02-13",
+      "name": "CREDIT CARD 3333 PAYMENT *//",
+      "category": null,
+      "merchant_name": "CREDIT CARD 3333 PAYMENT *//",
+      "pending": false,
+      "created_at": "2026-03-06T17:38:23.890135+00:00"
+    },
+    {
+      "id": "qgl5vw3gm3FWgzzpkojvIwj4wDBw7LFgDqnko",
+      "account_id": "W6Jw3Nx6oxTkZ33Mj6bXSjXLB8LRJGi6LG569",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "amount": 5.4,
+      "date": "2026-02-13",
+      "name": "Uber 063015 SF**POOL**",
+      "category": null,
+      "merchant_name": "Uber",
+      "pending": false,
+      "created_at": "2026-03-06T17:38:23.890135+00:00"
+    },
+    {
+      "id": "eN64LEpNqpsGNKKpwPAVSMWbMpXM6eTrjwp5z",
+      "account_id": "bdpeZEMdaMUGd668wQrVS6WBxRBEm5cmDwJmJ",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "amount": 5850,
+      "date": "2026-02-12",
+      "name": "ACH Electronic CreditGUSTO PAY 123456",
+      "category": null,
+      "merchant_name": "ACH Electronic CreditGUSTO PAY 123456",
+      "pending": false,
+      "created_at": "2026-03-06T17:38:23.890135+00:00"
+    },
+    {
+      "id": "d4ge1EL4lLsk4qqP3lbVSJ6XJvPJp7FJW37e8",
+      "account_id": "GLwbJZMLGMhKnjjWDM8dI6Xl84l9nAc6E4L6v",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "amount": 1000,
+      "date": "2026-02-12",
+      "name": "CD DEPOSIT .INITIAL.",
+      "category": null,
+      "merchant_name": "CD DEPOSIT .INITIAL.",
+      "pending": false,
+      "created_at": "2026-03-06T17:38:23.890135+00:00"
+    },
+    {
+      "id": "7zPvoqKzJKhvKWWypAR4fKeAKnxKkEud9Gene",
+      "account_id": "nL4mvErLXrhGLVVJn8QvSv9AG1AVz6cAxBXA4",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "amount": 78.5,
+      "date": "2026-02-11",
+      "name": "Touchstone Climbing",
+      "category": null,
+      "merchant_name": "Touchstone Climbing",
+      "pending": false,
+      "created_at": "2026-03-06T17:38:23.890135+00:00"
+    },
+    {
+      "id": "K8RwJko8eoIprGGwJq7VtwGKwLxwnXFRBvMbK",
+      "account_id": "W6Jw3Nx6oxTkZ33Mj6bXSjXLB8LRJGi6LG569",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "amount": -500,
+      "date": "2026-02-11",
+      "name": "United Airlines",
+      "category": null,
+      "merchant_name": "United Airlines",
+      "pending": false,
+      "created_at": "2026-03-06T17:38:23.890135+00:00"
+    },
+    {
+      "id": "r8qXvEx8LxIG8MMJvZXVSNlmNpgNDBu75vEgG",
+      "account_id": "W6Jw3Nx6oxTkZ33Mj6bXSjXLB8LRJGi6LG569",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "amount": 12,
+      "date": "2026-02-10",
+      "name": "McDonald's",
+      "category": null,
+      "merchant_name": "McDonald's",
+      "pending": false,
+      "created_at": "2026-03-06T17:38:23.890135+00:00"
+    },
+    {
+      "id": "zyJBvKey4ehMB44l3ygQI38B3Ln3yDflvGpWj",
+      "account_id": "W6Jw3Nx6oxTkZ33Mj6bXSjXLB8LRJGi6LG569",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "amount": 4.33,
+      "date": "2026-02-10",
+      "name": "Starbucks",
+      "category": null,
+      "merchant_name": "Starbucks",
+      "pending": false,
+      "created_at": "2026-03-06T17:38:23.890135+00:00"
+    },
+    {
+      "id": "BewNJPjeqjIL95583j1DHZ4qZmMZWQF4KGrnV",
+      "account_id": "W6Jw3Nx6oxTkZ33Mj6bXSjXLB8LRJGi6LG569",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "amount": 89.4,
+      "date": "2026-02-09",
+      "name": "SparkFun",
+      "category": null,
+      "merchant_name": "FUN",
+      "pending": false,
+      "created_at": "2026-03-06T17:38:23.890135+00:00"
+    },
+    {
+      "id": "xbxLvljbdjIXbAAW1z5ZIrEArNDrpvu6GE8vp",
+      "account_id": "A715JNP7lPtKx88PoAmlIPgJ8DJMxWc9Gvk9w",
+      "user_id": "22527dda-eb18-48a2-8c3f-b7268a55caec",
+      "amount": -4.22,
+      "date": "2026-02-08",
+      "name": "INTRST PYMNT",
+      "category": null,
+      "merchant_name": "INTRST PYMNT",
+      "pending": false,
+      "created_at": "2026-03-06T17:38:23.890135+00:00"
+    }
+  ]
+}
